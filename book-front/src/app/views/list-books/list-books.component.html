@@ -1,0 +1,54 @@
+<div class="mat-elevation-z8" style="margin: 50px;">
+  <mat-toolbar color="primary">Books List</mat-toolbar>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="author">
+      <th mat-header-cell *matHeaderCellDef>Author</th>
+      <td mat-cell *matCellDef="let element">{{ element.author }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef>Year</th>
+      <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef>Created at</th>
+        <td mat-cell *matCellDef="let element"> {{ formatDateTime(element.created_at) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_at">
+        <th mat-header-cell *matHeaderCellDef>Last update</th>
+        <td mat-cell *matCellDef="let element">{{ formatDateTime(element.updated_at) }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon  (click)="onEdit(element.id)" style="cursor: pointer;" color="primary">edit</mat-icon>
+            <mat-icon (click)="onDelete(element.id)" style="cursor: pointer;  color: red;" color="warn">delete</mat-icon>
+        </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+  <div style="display: flex; justify-content: flex-start;  padding: 50px;">
+    <button  mat-raised-button color="primary" (click)="AddBook()" >Add Book</button>
+  </div>
+</div>

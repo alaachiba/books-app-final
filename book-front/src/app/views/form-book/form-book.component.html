@@ -1,0 +1,37 @@
+<div class="mat-elevation-z8" style="margin: 100px;" >
+  
+  <mat-toolbar color="primary">  {{ isUpdate ? 'Update Book' : 'Add Book' }}</mat-toolbar>
+<form style="padding:  100px; display: flex; flex-direction: column;" [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form-container" >
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter book title" />
+      <mat-error *ngIf="bookForm.get('title')?.hasError('required')">
+        Title is required
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Author</mat-label> 
+      <input matInput formControlName="author" placeholder="Enter author name" />
+      <mat-error *ngIf="bookForm.get('author')?.hasError('required')">
+        Author is required
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Year</mat-label>
+      <input matInput formControlName="year" placeholder="Enter year" />
+      <mat-error *ngIf="bookForm.get('year')?.hasError('required')">
+        Year is required
+      </mat-error>
+      <mat-error *ngIf="bookForm.get('year')?.hasError('pattern')">
+        Year must be a 4-digit number
+      </mat-error>
+    </mat-form-field>
+    <div style="width: 100%; display: flex ; justify-content: space-between;">
+      <button style="width: 40%;" mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
+      <button style="width: 40%;" mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+    
+  </form>
+</div>
